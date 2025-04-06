@@ -1,6 +1,6 @@
 @KantorAPI_HostAddress = http://localhost:5209
 
-GET {{KantorAPI_HostAddress}}/weatherforecast/
+GET {{KantorAPI_HostAddress}}/download/
 Accept: application/json
 
 ###
