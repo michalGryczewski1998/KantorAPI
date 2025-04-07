@@ -8,6 +8,12 @@ namespace KantorAPI.Pobieranie.Services
     public class DownloadService : IDownload
     {
         private readonly string _url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
+        ICheckData _checkData;
+
+        public DownloadService(ICheckData checkData)
+        {
+            _checkData = checkData;
+        }
 
         public async Task<bool> DownloadData()
         {
@@ -37,12 +43,12 @@ namespace KantorAPI.Pobieranie.Services
                                     if (reader.Name == "Cube" && reader.GetAttribute("time") != null)
                                     {
                                         date = Convert.ToDateTime(reader.GetAttribute("time"));
-                                        //bool chech = CheckDataInDatabase(date);
+                                        bool chech = _checkData.Check(date);
 
-                                        //if (chech)
-                                        //{
-                                        //    break;
-                                        //}
+                                        if (chech)
+                                        {
+                                            break;
+                                        }
                                     }
                                     if (reader.GetAttribute("rate") != null && reader.GetAttribute("currency") != null)
                                     {
