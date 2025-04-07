@@ -52,11 +52,12 @@ namespace KantorAPI.Pobieranie.Services
                                     }
                                     if (reader.GetAttribute("rate") != null && reader.GetAttribute("currency") != null)
                                     {
-                                        DaneWalutoweModel currency = new();
-
-                                        currency.Currency = reader.GetAttribute("currency");
-                                        currency.Rate = Convert.ToDouble(reader.GetAttribute("rate").Replace(".", ","));
-                                        currency.Time = date;
+                                        DaneWalutoweModel currency = new()
+                                        {
+                                            Currency = reader.GetAttribute("currency"),
+                                            Rate = Convert.ToDouble(reader.GetAttribute("rate").Replace(".", ",")),
+                                            Time = date
+                                        };
 
                                         listCurrency.Add(currency);
                                     }
